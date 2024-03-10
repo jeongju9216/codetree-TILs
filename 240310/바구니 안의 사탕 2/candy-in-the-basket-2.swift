@@ -12,11 +12,10 @@ for _ in 0..<n {
 
 var result = Int.min
 for i in 0...maxCount {
-    guard i - k >= 0, i + k <= maxCount else {
-        continue
-    }
-
-    let sum = arr[i-k...i+k].reduce(0, +)
+    let start = max(0, i - k)
+    let end = min(maxCount, i + k)
+    
+    let sum = arr[start...end].reduce(0, +)
     result = max(result, sum)
 }
 
