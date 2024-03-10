@@ -11,7 +11,7 @@ for _ in 0..<n {
 }
 
 var result = Int.min
-for i in 0..<maxCount {
+for i in 0...maxCount {
     guard i - k >= 0, i + k <= maxCount else {
         continue
     }
