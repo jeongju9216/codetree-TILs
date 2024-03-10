@@ -11,7 +11,7 @@ for num in arrB {
 
 for i in 0...n-m {
     var dictA: [Int: Int] = [:]
-    for num in arrA {
+    for num in arrA[i..<i+m] {
         dictA[num, default: 0] += 1
     }
     
