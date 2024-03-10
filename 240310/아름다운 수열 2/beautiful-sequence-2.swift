@@ -5,7 +5,7 @@ let arrB = readLine()!.split { $0 == " " }.map { Int(String($0))! }
 
 var result = 0
 let setB = Set(arrB)
-for i in 0..<n-m {
+for i in 0...n-m {
     let setA = Set(arrA[i..<i+m])
     if setA == setB {
         result += 1
