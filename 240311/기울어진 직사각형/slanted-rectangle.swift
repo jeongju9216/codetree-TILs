@@ -1,23 +1,19 @@
-let dx = [-1, 1, 1, -1]
-let dy = [1, 1, -1, 1]
+let dx = [-1, -1, 1, 1]
+let dy = [1, -1, -1, 1]
 
 func cross(_ x: Int, _ y: Int, _ w: Int, _ h: Int) -> Int {
     let move = [w, h, w, h]
-    
-    var sum = 0
-    for t in 0..<4 {
-        let maxX = x + dx[t] * move[t]
-        let maxY = y + dy[t] * move[t]
-        guard 0..<n ~= maxX,
-              0..<n ~= maxY else {
-            return 0
-        }
 
-        var nx = x
-        var ny = y
-        for i in 0..<move[t] {
+    var sum = 0
+    var nx = x, ny = y
+    for t in 0..<4 {
+        for _ in 0..<move[t] {
             nx += dx[t]
             ny += dy[t]
+            guard 0..<n ~= nx,
+                  0..<n ~= ny else {
+                return 0
+            }
             sum += board[nx][ny]
         }
     }
