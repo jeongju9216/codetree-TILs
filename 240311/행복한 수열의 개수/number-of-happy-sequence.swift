@@ -1,4 +1,8 @@
 func isHappy(_ arr: [Int]) -> Bool {
+    guard m > 1 else { 
+        return true 
+    }
+
     var count = 1
     for i in 1..<n {
         if arr[i] == arr[i-1] {
