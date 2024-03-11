@@ -26,7 +26,7 @@ for _ in 0..<n {
 
 var result = Int.min
 for i in 0..<n {
-    for j in 0..<n {        
+    for j in 0..<m {        
         for k in 0..<dx.count {
             var isValid = true
             var sum = 0
