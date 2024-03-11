@@ -48,7 +48,7 @@ for _ in 0..<n {
 var result = 0
 var visited: [[Bool]] = []
 var k = 0
-while cost(k) <= n * n {
+while cost(k-1) <= n * n {
     for i in 0..<n {
         for j in 0..<n {
             let numberOfGolds = bfs(i, j, k)
