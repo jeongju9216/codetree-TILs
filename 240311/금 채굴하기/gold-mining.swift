@@ -40,20 +40,28 @@ func bfs(_ x: Int, _ y: Int, _ k: Int) -> Int {
 let nm = readLine()!.split { $0 == " " }.map { Int(String($0))! }
 let n = nm[0], m = nm[1]
 var board: [[Int]] = []
+var total = 0
 for _ in 0..<n {
     let input = readLine()!.split { $0 == " " }.map { Int(String($0))! }
     board.append(input)
+
+    total += input.filter { $0 == 1 }.count
 }
 
 var result = 0
 var visited: [[Bool]] = []
 var k = 0
-while cost(k-1) <= n * n {
+var isFinished = false
+while !isFinished {
     for i in 0..<n {
         for j in 0..<n {
             let numberOfGolds = bfs(i, j, k)
             if cost(k) <= numberOfGolds * m {
                 result = max(result, numberOfGolds)
+            }
+            if numberOfGolds == total {
+                isFinished = true
+                break
             }
         }
     }
