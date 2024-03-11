@@ -1,24 +1,37 @@
-let dx = [0, -1, 1, 0, 0]
-let dy = [0, 0, 0, -1, 1]
+let dx = [-1, 1, 0, 0]
+let dy = [0, 0, -1, 1]
 
-func findGold(_ x: Int, _ y: Int, _ depth: Int) -> Int {
-    guard depth < m else { 
-        return board[x][y]
-    }
+func cost(_ k: Int) -> Int {
+    k * k + (k + 1) * (k + 1)
+}
 
-    var sum = 0
-    for i in 0..<dx.count {
-        let nx = x + dx[i]
-        let ny = y + dy[i]
+func bfs(_ x: Int, _ y: Int, _ k: Int) -> Int {
+    var visited = Array(repeating: Array(repeating: false, count: n + 1), count: n + 1)            
+    var queue: [(x: Int, y: Int, depth: Int)] = [(x, y, 0)]
+    var index = 0
+    
+    var sum = board[x][y]
+    visited[x][y] = true
+    while index < queue.count {
+        let (x, y, depth) = queue[index]
+        index += 1
 
-        guard 0..<n ~= nx, 
-              0..<n ~= ny,
-              !visited[nx][ny] else {
-            continue
+        for i in 0..<4 {
+            let nx = x + dx[i]
+            let ny = y + dy[i]
+            let nd = depth + 1
+
+            guard 0..<n ~= nx, 
+                  0..<n ~= ny,
+                  nd <= k,
+                  !visited[nx][ny] else {
+                continue
+            }
+
+            sum += board[nx][ny]
+            visited[nx][ny] = true
+            queue.append((nx, ny, nd))
         }
-
-        visited[nx][ny] = true
-        sum += findGold(nx, ny, depth + 1)
     }
 
     return sum
@@ -34,12 +47,18 @@ for _ in 0..<n {
 
 var result = 0
 var visited: [[Bool]] = []
-for i in 0..<n {
-    for j in 0..<n {
-        visited = Array(repeating: Array(repeating: false, count: n + 1), count: n + 1)
-        let sum = findGold(i, j, 0)
-        result = max(result, sum)
+var k = 0
+while cost(k) <= n * n {
+    for i in 0..<n {
+        for j in 0..<n {
+            let numberOfGolds = bfs(i, j, k)
+            if cost(k) <= numberOfGolds * m {
+                result = max(result, numberOfGolds)
+            }
+        }
     }
+
+    k += 1
 }
 
 print(result)
