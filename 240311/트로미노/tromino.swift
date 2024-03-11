@@ -10,7 +10,7 @@ let dy = [
     [0, 0, 1],
     [0, 1, 0],
     [0, 0, -1],
-    [0, 0, 1],
+    [0, 1, 1],
     [0, 1, 2],
     [0, 0, 0]
 ]
@@ -26,11 +26,14 @@ for _ in 0..<n {
 
 var result = Int.min
 for i in 0..<n {
-    for j in 0..<m {        
+    for j in 0..<m {  
+
+        // 블럭 모음 검사      
         for k in 0..<dx.count {
             var isValid = true
             var sum = 0
 
+            // 숫자 하나씩 더함
             for t in 0..<dx[k].count {
                 let nx = i + dx[k][t]
                 let ny = j + dy[k][t]
