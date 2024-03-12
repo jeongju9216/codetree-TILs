@@ -1,11 +1,11 @@
 let n = Int(readLine()!)!
+var setA: Set<Int> = Set(1...2*n)
 var setB: Set<Int> = []
 for _ in 0..<n {
     let input = Int(readLine()!)!
     setB.insert(input)
+    setA.remove(input)
 }
-
-var setA = Set((1...2*n).filter { !setB.contains($0) })
 
 var result = 0
 for numB in setB {
@@ -16,6 +16,5 @@ for numB in setB {
         setA.remove(setA.min()!)
     }
 }
-
 
 print(result)
