@@ -5,23 +5,23 @@ for _ in 0..<n {
     arrB.append(input)
 }
 
-let arrA: [Int] = (1...2*n).filter { !arrB.contains($0) }
-var drawCards: Set<Int> = []
+var arrA: [Int] = (1...2*n).filter { !arrB.contains($0) }
 
 var result = 0
 for numberB in arrB {
     let n2 = 2 * n
-    guard numberB + 1 <= n2 else {
+    guard numberB + 1 <= n2, arrA.max()! > numberB else {
+        arrA.removeFirst()
         continue
     }
 
-    for numberA in arrA {
-        guard !drawCards.contains(numberA),
-              !arrB.contains(numberA) else {
+    for i in 0..<arrA.count {
+        guard !arrB.contains(arrA[i]),
+              arrA[i] > numberB else {
             continue
         }
 
-        drawCards.insert(numberA)
+        arrA.remove(at: i)
         result += 1
         break
     }
