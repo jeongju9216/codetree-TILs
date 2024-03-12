@@ -1,22 +1,21 @@
 let n = Int(readLine()!)!
-var arrB: [Int] = []
+var setB: Set<Int> = []
 for _ in 0..<n {
     let input = Int(readLine()!)!
-    arrB.append(input)
+    setB.insert(input)
 }
+
+var setA = Set((1...2*n).filter { !setB.contains($0) })
 
 var result = 0
-var remainingCards = Set(1...arrB.count * 2)
-
-for card in arrB {
-    let higherCards = remainingCards.filter { $0 > card }
-    if !higherCards.isEmpty {
-        let maxHigherCard = higherCards.max()!
+for numB in setB {
+    if let higherA = setA.filter { $0 > numB }.min() {
+        setA.remove(higherA)
         result += 1
-        remainingCards.remove(maxHigherCard)
     } else {
-        remainingCards.remove(card)
+        setA.remove(setA.min()!)
     }
 }
+
 
 print(result)
