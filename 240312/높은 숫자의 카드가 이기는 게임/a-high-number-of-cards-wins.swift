@@ -5,25 +5,17 @@ for _ in 0..<n {
     arrB.append(input)
 }
 
-var arrA: [Int] = (1...2*n).filter { !arrB.contains($0) }
-
 var result = 0
-for numberB in arrB {
-    let n2 = 2 * n
-    guard numberB + 1 <= n2, arrA.max()! > numberB else {
-        arrA.removeFirst()
-        continue
-    }
+var remainingCards = Set(1...arrB.count * 2)
 
-    for i in 0..<arrA.count {
-        guard !arrB.contains(arrA[i]),
-              arrA[i] > numberB else {
-            continue
-        }
-
-        arrA.remove(at: i)
+for card in arrB {
+    let higherCards = remainingCards.filter { $0 > card }
+    if !higherCards.isEmpty {
+        let maxHigherCard = higherCards.max()!
         result += 1
-        break
+        remainingCards.remove(maxHigherCard)
+    } else {
+        remainingCards.remove(card)
     }
 }
 
