@@ -1,19 +1,19 @@
 let n = Int(readLine()!)!
-var arrB: [Int] = []
+var setB: Set<Int> = []
 for _ in 0..<n {
     let input = Int(readLine()!)!
-    arrB.append(input)
+    setB.insert(input)
 }
 
 var arrA: [Int] = []
 for i in 1...2*n {
-    if !arrB.contains(i) {
+    if !setB.contains(i) {
         arrA.append(i)
     }
 }
 
 arrA.sort()
-arrB.sort()
+let arrB = setB.sorted()
 
 var result = 0
 var bIndex = 0
