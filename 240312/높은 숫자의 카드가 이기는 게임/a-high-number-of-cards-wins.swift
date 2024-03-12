@@ -1,20 +1,27 @@
 let n = Int(readLine()!)!
 var arrB: [Int] = []
-var arrA = Array(1...2*n)
 for _ in 0..<n {
     let input = Int(readLine()!)!
     arrB.append(input)
-    arrA.removeAll { $0 == input }
 }
 
+var setA: Set<Int> = []
+var setB = Set(arrB)
 var result = 0
 for numberB in arrB {
-    for numberA in arrA {
-        if numberA > numberB {
-            arrA.removeAll { $0 == numberA }
-            result += 1
-            break
+    guard numberB + 1 <= 2 * n else {
+        continue
+    }
+
+    for numberA in numberB+1...2*n {
+        guard !setA.contains(numberA),
+              !setB.contains(numberA) else {
+            continue
         }
+
+        setA.insert(numberA)
+        result += 1
+        break
     }
 }
 
