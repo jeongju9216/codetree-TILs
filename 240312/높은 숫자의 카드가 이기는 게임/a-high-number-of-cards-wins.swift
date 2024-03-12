@@ -5,21 +5,23 @@ for _ in 0..<n {
     arrB.append(input)
 }
 
-var setA: Set<Int> = []
-var setB = Set(arrB)
+let arrA: [Int] = (1...2*n).filter { !arrB.contains($0) }
+var drawCards: Set<Int> = []
+
 var result = 0
 for numberB in arrB {
-    guard numberB + 1 <= 2 * n else {
+    let n2 = 2 * n
+    guard numberB + 1 <= n2 else {
         continue
     }
 
-    for numberA in numberB+1...2*n {
-        guard !setA.contains(numberA),
-              !setB.contains(numberA) else {
+    for numberA in arrA {
+        guard !drawCards.contains(numberA),
+              !arrB.contains(numberA) else {
             continue
         }
 
-        setA.insert(numberA)
+        drawCards.insert(numberA)
         result += 1
         break
     }
