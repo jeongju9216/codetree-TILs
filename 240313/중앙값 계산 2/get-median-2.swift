@@ -13,4 +13,6 @@ for i in 0..<arr.count {
     }
 }
 
-print(result)
+for num in result {
+    print(num, terminator: " ")
+}
