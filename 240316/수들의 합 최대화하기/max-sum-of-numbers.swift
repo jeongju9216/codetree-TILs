@@ -6,9 +6,8 @@ func canPainted(_ x: Int, _ y: Int) -> Bool {
            horizontal.filter { $0 }.count == 0
 }
 
-func backtracking(_ arr: [Int]) {
-    guard arr.count < n else {
-        let sum = arr.reduce(0, +)
+func backtracking(_ sum: Int, _ count: Int) {
+    guard count < n else {
         result = max(result, sum)
         return
     }
@@ -17,7 +16,7 @@ func backtracking(_ arr: [Int]) {
         for j in 0..<n {
             if canPainted(i, j) {
                 visited[i][j] = true
-                backtracking(arr + [board[i][j]])
+                backtracking(sum + board[i][j], count + 1)
                 visited[i][j] = false
             }
         }
@@ -33,5 +32,5 @@ for _ in 0..<n {
 
 var visited = Array(repeating: Array(repeating: false, count: n), count: n)
 var result = Int.min
-backtracking([])
+backtracking(0, 0)
 print(result)
