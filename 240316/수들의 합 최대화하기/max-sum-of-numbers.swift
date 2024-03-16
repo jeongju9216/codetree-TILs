@@ -1,9 +1,10 @@
 func canPainted(_ x: Int, _ y: Int) -> Bool {
-    let vertical = (0..<n).map { visited[$0][y] }
-    let horizontal = visited[x]
-
-    return vertical.filter { $0 }.count == 0 &&
-           horizontal.filter { $0 }.count == 0
+    for i in 0..<n {
+        if visited[x][i] || visited[i][y] {
+            return false
+        }
+    }
+    return true
 }
 
 func backtracking(_ sum: Int, _ count: Int) {
