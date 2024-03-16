@@ -1,5 +1,5 @@
 func checkRectangle(_ x: Int, _ y: Int) -> Int {
-    var maxY = m
+    var maxY = m - 1
     var result = -1
     for i in x..<n {
         if board[i][y] < 0 {
@@ -8,9 +8,9 @@ func checkRectangle(_ x: Int, _ y: Int) -> Int {
             result = max(result, (i - x + 1))
         }
 
-        for j in y..<maxY {
+        for j in y...maxY {
             if board[i][j] < 0 {
-                maxY = j
+                maxY = j - 1
                 break
             } else {
                 result = max(result, (i - x + 1) * (j - y + 1))
