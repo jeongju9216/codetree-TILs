@@ -28,7 +28,7 @@ for _ in 0..<n {
 }
 
 var visited: [[Bool]] = Array(repeating: Array(repeating: false, count: n), count: n)
-var result = 0, blockNum = 0
+var result = 0, popCount = 0
 var count = 0
 for i in 0..<n {
     for j in 0..<n {
@@ -37,11 +37,13 @@ for i in 0..<n {
             visited[i][j] = true
             dfs(i, j)
             if result < count {
+                if count >= 4 {
+                    popCount += 1
+                }
                 result = count
-                blockNum = board[i][j]
             }
         }
     }
 }
 
-print("\(blockNum) \(result)")
+print("\(popCount) \(result)")
