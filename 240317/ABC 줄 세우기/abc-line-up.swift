@@ -1,34 +1,13 @@
-let letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".map { String($0) }
-
 let n = Int(readLine()!)!
 var arr = readLine()!.split { $0 == " " }.map { String($0) }
-let std = Array(letters[..<n])
 
 var result = 0
-while arr != std {
-    result += 1
-    var tmp = arr
-
-    var maxCorrectCount = 0
-    var maxTmp = tmp
-    for i in 1..<n {
-        tmp.swapAt(i, i-1)
-
-        var correct = 0
-        for i in 0..<n {
-            if tmp[i] == std[i] {
-                correct += 1
-            }
-        }
-
-        if maxCorrectCount < correct {
-            maxCorrectCount = correct
-            maxTmp = tmp
-        }
-
-        tmp = arr
+for i in 1..<n {
+    var currentIndex = i
+    while currentIndex > 0 && arr[currentIndex] < arr[currentIndex-1] {
+        arr.swapAt(currentIndex, currentIndex - 1)
+        currentIndex -= 1
+        result += 1
     }
-
-    arr = maxTmp
 }
 print(result)
