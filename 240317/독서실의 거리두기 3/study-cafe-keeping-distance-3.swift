@@ -18,7 +18,7 @@ for i in 1..<n {
     prevPoint = i
 }
 
-let center = (right - left) / 2
+let center = left + (right - left) / 2
 arr[center] = 1
 
 var result = Int.max
