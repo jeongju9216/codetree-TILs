@@ -5,37 +5,19 @@ for _ in 0..<4 {
     arr.append(input)
 }
 
-var sum1: [Int] = []
+var counts: [Int: Int] = [:]
 for i in 0..<n {
-    let num = arr[0][i]
     for j in 0..<n {
-        sum1.append(num + arr[1][j])
+        counts[arr[0][i] + arr[1][j], default: 0] += 1
     }
-}
-
-var sum2: [Int] = []
-for i in 0..<n {
-    let num = arr[2][i]
-    for j in 0..<n {
-        sum2.append(num + arr[3][j])
-    }
-}
-
-var counts1: [Int: Int] = [:]
-for num in sum1 {
-    counts1[num, default: 0] += 1
-}
-
-var counts2: [Int: Int] = [:]
-for num in sum2 {
-    counts2[num, default: 0] += 1
 }
 
 var result = 0
-for num in sum1 {
-    let diff = 0 - num
-    counts1[num, default: 0] -= 1
-    result += counts2[diff] ?? 0
+for i in 0..<n {
+    for j in 0..<n {
+        let diff = 0 - (arr[2][i] + arr[3][j])
+        result += counts[diff] ?? 0
+    }
 }
 
 print(result)
