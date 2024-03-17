@@ -36,10 +36,12 @@ for i in 0..<n {
             count = 0
             visited[i][j] = true
             dfs(i, j)
+            
+            if count >= 4 {
+                popCount += 1
+            }
+            
             if result < count {
-                if count >= 4 {
-                    popCount += 1
-                }
                 result = count
             }
         }
