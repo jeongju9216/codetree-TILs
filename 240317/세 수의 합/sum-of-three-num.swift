@@ -9,7 +9,7 @@ for i in 0..<n {
     for j in 0..<n where i != j {
         let num1 = arr[i]
         let num2 = arr[j]
-        let diff = num1 + num2 + k
+        let diff = k - (num1 + num2)
         
         result += counts[diff] ?? 0
         counts[diff, default: 0] += 1
