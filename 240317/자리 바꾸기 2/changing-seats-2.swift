@@ -21,17 +21,11 @@ for _ in 0..<3 {
         arr[a] = arr[b]
         arr[b] = tmp
 
-        sets[a].insert(arr[a])
-        sets[b].insert(arr[b])
+        sets[arr[a]].insert(a)
+        sets[arr[b]].insert(b)
     }
 }
 
 for i in 0..<n {
-    var count = 0
-    for set in sets {
-        if set.contains(i) {
-            count += 1
-        }
-    }
-    print(count)
+    print(sets[i].count)
 }
