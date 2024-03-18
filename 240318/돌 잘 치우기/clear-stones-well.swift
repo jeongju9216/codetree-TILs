@@ -3,33 +3,27 @@ typealias Point = (x: Int, y: Int)
 let dx = [-1, 1, 0, 0]
 let dy = [0, 0, -1, 1]
 
-func contains(_ arr: [Point], _ point: Point) -> Bool {
-    for p in arr {
-        if p.x == point.x && p.y == point.y {
-            return true
-        }
-    }
-    return false
-}
-
-func dfs(_ deletions: [Point]) {
-    guard deletions.count < m else {
-        let count = bfs(deletions)
+func dfs(_ stones: Int, _ board: [[Int]]) {
+    guard stones < m else {
+        let count = bfs(board)
         result = max(result, count)
         return
     }
 
+    var board = board
     for i in 0..<n {
         for j in 0..<n {
-            if !contains(deletions, (i, j)) && board[i][j] == 1 {
-                dfs(deletions + [Point(i, j)])
+            if board[i][j] == 1 {
+                board[i][j] = 0
+                dfs(stones + 1, board)
+                board[i][j] = 1
             }
         }
     }
 }
 
-func bfs(_ deletions: [Point]) -> Int {
-    var queue: [Point] = queue
+func bfs(_ board: [[Int]]) -> Int {
+    var queue: [Point] = starts
     var index = 0
     var visited = Array(repeating: Array(repeating: false, count: n), count: n)
     for point in queue {
@@ -48,7 +42,7 @@ func bfs(_ deletions: [Point]) -> Int {
                 continue
             }
 
-            if board[nx][ny] == 0 || contains(deletions, (nx, ny)) {
+            if board[nx][ny] == 0 {
                 visited[nx][ny] = true
                 queue.append((nx, ny))
             }
@@ -66,13 +60,13 @@ for _ in 0..<n {
     board.append(input)
 }
 
-var queue: [Point] = []
+var starts: [Point] = []
 var index = 0
 for _ in 0..<k {
     let input = readLine()!.split { $0 == " " }.map { Int(String($0))! }
-    queue.append((input[0]-1, input[1]-1))
+    starts.append((input[0]-1, input[1]-1))
 }
 
 var result = 0
-dfs([])
+dfs(0, board)
 print(result)
