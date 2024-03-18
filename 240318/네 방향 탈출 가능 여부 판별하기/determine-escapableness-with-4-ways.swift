@@ -32,7 +32,8 @@ while index < queue.count {
 
         guard 0..<n ~= nx, 
               0..<m ~= ny, 
-              !visited[nx][ny] 
+              !visited[nx][ny],
+              board[nx][ny] == 1
         else {
             continue
         }
