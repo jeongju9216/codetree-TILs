@@ -7,7 +7,8 @@ func melting() -> Int {
     var queue: [Point] = [(0, 0)]
     var index = 0
     var visited = Array(repeating: Array(repeating: false, count: m), count: n)
-    
+    visited[0][0] = true
+
     var ice: [Point] = []
     while index < queue.count {
         let (x, y) = queue[index]
@@ -17,14 +18,17 @@ func melting() -> Int {
             let nx = x + dx[i]
             let ny = y + dy[i]
 
-            guard 0..<n ~= nx, 0..<n ~= ny, !visited[nx][ny] else {
+            guard 0..<n ~= nx, 
+                  0..<m ~= ny, 
+                  !visited[nx][ny] 
+            else {
                 continue
             }
 
             visited[nx][ny] = true
             if board[nx][ny] == 0 {
                 queue.append((nx, ny))
-            } else {
+            } else if board[nx][ny] >= 1 {
                 ice.append((nx, ny))
             }
         }
