@@ -10,7 +10,7 @@ func countGround() -> Int {
     var count = 0
     for i in 0..<n {
         for j in 0..<n {
-            if board[i][j] > 0 {
+            if board[i][j] > 0 || board[i][j] == -1 {
                 count += 1
             }
         }
@@ -41,10 +41,8 @@ func checkBoom(_ type: Int, _ point: Point) {
             continue
         }
 
-        if board[nx][ny] == 0 {
-            board[nx][ny] = 2
-        } else if board[nx][ny] == 2 {
-            board[nx][ny] = 3
+        if board[nx][ny] >= 0 {
+            board[nx][ny] += 1
         }
     }
 }
@@ -58,10 +56,8 @@ func uncheckBoom(_ type: Int, _ point: Point) {
             continue
         }
 
-        if board[nx][ny] == 2 {
-            board[nx][ny] = 0
-        } else if board[nx][ny] == 3 {
-            board[nx][ny] = 2
+        if board[nx][ny] >= 0 {
+            board[nx][ny] -= 1
         }
     }
 }
@@ -75,6 +71,7 @@ for i in 0..<n {
     for j in 0..<n {
         if input[j] == 1 {
             points.append((i, j))
+            board[i][j] = -1
         }
     }
 }
