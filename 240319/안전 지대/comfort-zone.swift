@@ -39,7 +39,7 @@ for _ in 0..<n {
 }
 
 var visited: [[Bool]] = []
-var maxCount = 0, k = 1
+var maxCount = Int.min, k = 1
 while true {
     visited = Array(repeating: Array(repeating: false, count: m), count: n)
     var currentCount = 0
@@ -59,4 +59,4 @@ while true {
     k += 1
 }
 
-print(maxCount, k - 1)
+print(k - 1, maxCount)
