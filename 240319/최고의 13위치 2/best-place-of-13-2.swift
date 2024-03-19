@@ -1,25 +1,12 @@
 typealias Point = (x: Int, y: Int)
 
-func isContains(_ arr: [Point], _ point: Point) -> Bool {
-    for p in arr {
-        if p.x == point.x && p.y == point.y {
-            return true
-        }
-    }
-    return false
-}
-
-func check(_ point: Point) -> Int {
-    var arr: [Point] = [point, (point.x, point.y + 1), (point.x, point.y + 2)]
-    var sum = arr.map { board[$0.x][$0.y] }.reduce(0, +)
+func check(_ p: Point) -> Int {
+    let sum = board[p.x][p.y] + board[p.x][p.y+1] + board[p.x][p.y+2]
 
     var maxSum = 0
     for i in 0..<n {
         for j in 0..<n-2 {
-            guard !isContains(arr, (i, j)), 
-                  !isContains(arr, (i, j + 1)), 
-                  !isContains(arr, (i, j + 2)) 
-            else {
+            if p.x == i && abs(p.y - j) <= 2 {
                 continue
             }
 
