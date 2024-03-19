@@ -58,9 +58,9 @@ func checkC1(_ x: Int, _ y: Int) -> Bool {
 
 func checkC2(_ x: Int, _ y: Int) -> Bool {
     let minXRange = max(x-2, 0)
-    let maxXRange = max(x+2, 18)
+    let maxXRange = min(x+2, 18)
     let minYRange = max(y-2, 0)
-    let maxYRange = max(y+2, 18)
+    let maxYRange = min(y+2, 18)
 
     let xArr = Array(minXRange...maxXRange)
     let yArr = Array(minYRange...maxYRange)
@@ -71,7 +71,7 @@ func checkC2(_ x: Int, _ y: Int) -> Bool {
 
     let item = board[x][y]
     for i in 0..<5 {
-        if board[xArr[i]][yArr[i]] != item {
+        if board[xArr[5-i-1]][yArr[i]] != item {
             return false
         }
     }
