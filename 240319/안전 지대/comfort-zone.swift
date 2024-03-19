@@ -33,14 +33,17 @@ func bfs(_ start: Point) {
 let nm = readLine()!.split { $0 == " " }.map { Int(String($0))! }
 let n = nm[0], m = nm[1]
 var board: [[Int]] = []
+var maxValue = 0
 for _ in 0..<n {
     let input = readLine()!.split { $0 == " " }.map { Int(String($0))! }
     board.append(input)
+    maxValue = max(maxValue, input.max()!)
 }
 
 var visited: [[Bool]] = []
-var maxCount = Int.min, k = 1
-while true {
+var maxCount = Int.min, maxK = 0
+var k = 1
+while k <= maxValue {
     visited = Array(repeating: Array(repeating: false, count: m), count: n)
     var currentCount = 0
     for i in 0..<n {
@@ -52,11 +55,11 @@ while true {
         }
     }
 
-    if currentCount <= maxCount {
-        break
+    if maxCount < currentCount {
+        maxCount = currentCount
+        maxK = k
     }
-    maxCount = currentCount
     k += 1
 }
 
-print(k - 1, maxCount)
+print(maxK, maxCount)
