@@ -1,9 +1,15 @@
 func checkH(_ x: Int, _ y: Int) -> Bool {
     let minRange = max(y-2, 0)
     let maxRange = min(y+2, 18)
+
+    let arr = Array(minRange...maxRange)
+    if arr.count != 5 {
+        return false
+    }
+
     let item = board[x][y]
-    for i in minRange...maxRange {
-        if board[x][i] != item {
+    for i in 0..<5 {
+        if board[x][arr[i]] != item {
             return false
         }
     }
@@ -13,9 +19,15 @@ func checkH(_ x: Int, _ y: Int) -> Bool {
 func checkV(_ x: Int, _ y: Int) -> Bool {
     let minRange = max(x-2, 0)
     let maxRange = min(x+2, 18)
+
+    let arr = Array(minRange...maxRange)
+    if arr.count != 5 {
+        return false
+    }
+
     let item = board[x][y]
-    for i in minRange...maxRange {
-        if board[i][y] != item {
+    for i in 0..<5 {
+        if board[arr[i]][y] != item {
             return false
         }
     }
@@ -27,12 +39,18 @@ func checkC1(_ x: Int, _ y: Int) -> Bool {
     let maxXRange = min(x+2, 18)
     let minYRange = max(y-2, 0)
     let maxYRange = min(y+2, 18)
+
+    let xArr = Array(minXRange...maxXRange)
+    let yArr = Array(minYRange...maxYRange)
+
+    if xArr.count != 5 || yArr.count != 5 {
+        return false
+    }
+
     let item = board[x][y]
-    for i in minXRange...maxXRange {
-        for j in minYRange...maxYRange {
-            if board[i][j] != item {
-                return false
-            }
+    for i in 0..<5 {
+        if board[xArr[i]][yArr[i]] != item {
+            return false
         }
     }
     return true
@@ -43,12 +61,18 @@ func checkC2(_ x: Int, _ y: Int) -> Bool {
     let maxXRange = max(x+2, 18)
     let minYRange = max(y-2, 0)
     let maxYRange = max(y+2, 18)
+
+    let xArr = Array(minXRange...maxXRange)
+    let yArr = Array(minYRange...maxYRange)
+
+    if xArr.count != 5 || yArr.count != 5 {
+        return false
+    }
+
     let item = board[x][y]
-    for i in (minXRange...maxXRange).reversed() {
-        for j in minYRange...maxYRange {
-            if board[i][j] != item {
-                return false
-            }
+    for i in 0..<5 {
+        if board[xArr[i]][yArr[i]] != item {
+            return false
         }
     }
     return true
