@@ -16,7 +16,10 @@ func check(_ point: Point) -> Int {
     var maxSum = 0
     for i in 0..<n {
         for j in 0..<n-2 {
-            guard !isContains(arr, (i, j)) else {
+            guard !isContains(arr, (i, j)), 
+                  !isContains(arr, (i, j + 1)), 
+                  !isContains(arr, (i, j + 2)) 
+            else {
                 continue
             }
 
