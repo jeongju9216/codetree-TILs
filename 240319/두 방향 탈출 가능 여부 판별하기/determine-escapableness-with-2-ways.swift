@@ -27,7 +27,6 @@ func dfs(_ point: Point) {
 
         visited[nx][ny] = true
         dfs((nx, ny))
-        visited[nx][ny] = false
     }
 }
 
