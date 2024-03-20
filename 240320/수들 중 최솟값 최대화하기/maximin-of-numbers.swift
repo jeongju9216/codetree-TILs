@@ -1,32 +1,18 @@
-func canPaint(_ x: Int, _ y: Int) -> Bool {
-    for i in 0..<n {
-        if visited[i][y] {
-            return false
-        }
-    }
-
-    for i in 0..<n {
-        if visited[x][i] {
-            return false
-        }
-    }
-
-    return true
-}
-
 func backtracking(_ arr: [Int], _ count: Int) {
     guard count < n else {
-        result = max(result, arr.min()!)
+        var minValue = Int.max
+        for i in 0..<n {
+            minValue = min(minValue, board[i][arr[i]])
+        }
+        result = max(result, minValue)
         return
     }
 
     for i in 0..<n {
-        for j in 0..<n {
-            if canPaint(i, j) {
-                visited[i][j] = true
-                backtracking(arr + [board[i][j]], count + 1)
-                visited[i][j] = false
-            }
+        if !visited[i] {
+            visited[i] = true
+            backtracking(arr + [i], count + 1)
+            visited[i] = false
         }
     }
 }
@@ -38,7 +24,7 @@ for _ in 0..<n {
     board.append(input)
 }
 
-var visited = Array(repeating: Array(repeating: false, count: n), count: n)
+var visited = Array(repeating: false, count: n)
 var result = 0
 backtracking([], 0)
 print(result)
