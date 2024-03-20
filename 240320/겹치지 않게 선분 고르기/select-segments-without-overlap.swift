@@ -1,32 +1,36 @@
 typealias Line = (s: Int, e: Int)
 
-func backtracking(_ index: Int) {
+func backtracking(_ index: Int, _ count: Int) {
+    result = max(result, count)
     guard index < n else {
-        counting()
         return
     }
-
+    
     for i in index..<n {
-        check(lines[i])
-        backtracking(i + 1)
-        uncheck(lines[i])
+        let canCheck = check(lines[i])
+        let c = canCheck ? count + 1 : count
+        backtracking(i + 1, c)
+        if canCheck {
+            uncheck(lines[i])
+        }
     }
 }
 
-func counting() {
-    let maxCount = counts.max() ?? 0
-    result = min(result, n - maxCount + 1)
-}
-
-func check(_ line: Line) {
+func check(_ line: Line) -> Bool {
+    var tmpVisited = visited
     for i in line.s...line.e {
-        counts[i] += 1
+        if tmpVisited[i] {
+            return false
+        }
+        tmpVisited[i] = true
     }
+    visited = tmpVisited
+    return true
 }
 
 func uncheck(_ line: Line) {
     for i in line.s...line.e {
-        counts[i] -= 1
+        visited[i] = false
     }
 }
 
@@ -39,7 +43,7 @@ for _ in 0..<n {
     maxEnd = max(maxEnd, input[0], input[1])
 }
 
-var counts: [Int] = Array(repeating: 0, count: maxEnd + 1)
-var result = Int.max
-backtracking(0)
+var visited = Array(repeating: false, count: maxEnd + 1)
+var result = 0
+backtracking(0, 0)
 print(result)
