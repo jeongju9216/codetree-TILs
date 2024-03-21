@@ -14,17 +14,25 @@ for _ in 0..<s {
     records.append((input[0], input[1]))
 }
 
-var men: Set<Int> = []
-for record in records {
-    let cheeses = infoList
-    .filter {  $0.p == record.p && $0.t < record.t }
-    .map { $0.m }
-    
-    for info in infoList {
-        if cheeses.contains(info.m) {
-            men.insert(info.p)
+// 치즈가 상할 가능성이 있는지 판단
+// i 치즈를 infoList의 모든 사람이 t 시간 전에 먹었는지 확인한다
+var result = 0
+for i in 1...m {
+    var count = 0
+    for record in records {
+        let info = infoList.filter { $0.p == record.p }
+        for man in info {
+            if man.m == i && man.t < record.t {
+                count += 1
+                break
+            }
         }
     }
-}
 
-print(men.count)
+    // 모든 record와 비교했을 때 모순이 없음
+    if count == records.count {
+        let ateCheesePerson = infoList.filter { $0.m == i }.count
+        result = max(result, ateCheesePerson)
+    }
+}
+print(result)
