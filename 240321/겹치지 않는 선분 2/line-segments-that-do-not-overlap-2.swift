@@ -1,7 +1,7 @@
 typealias Point = (s: Int, e: Int)
 
 func check(_ p1: Point, _ p2: Point) -> Bool {
-    if p1.s < p2.s && p1.e < p2.e {
+    if p1.s < p2.s && p1.e <= p2.e {
         return true
     }
 
