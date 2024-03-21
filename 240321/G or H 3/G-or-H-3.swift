@@ -9,6 +9,8 @@ for _ in 0..<n {
     points.append((p, input[1] == "G" ? 1 : 2))
 }
 
+points.sort { $0.p < $1.p }
+
 var result = 0
 for i in 0..<n {
     var count = points[i].s
