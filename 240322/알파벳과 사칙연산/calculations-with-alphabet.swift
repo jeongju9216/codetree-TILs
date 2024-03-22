@@ -50,7 +50,7 @@ for ch in arr {
     }
 }
 
-var result = 0
+var result = Int.min
 if arr.count == 1 {
     print(4)
 } else {
