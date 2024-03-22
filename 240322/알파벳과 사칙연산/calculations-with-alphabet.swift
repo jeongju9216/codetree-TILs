@@ -50,6 +50,6 @@ for ch in arr {
     }
 }
 
-var result = 0
+var result = 4
 backtracking([])
 print(result)
