@@ -39,7 +39,16 @@ func backtracking(_ values: [Int]) {
 }
 
 var arr = Array(readLine()!).map { String($0) }
-var dict: [String: Int] = ["a": 0, "b": 1, "c": 2, "d": 3, "e": 4, "f": 5]
+var dict: [String: Int] = [:]
+for ch in arr {
+    if ch == "+" || ch == "-" || ch == "*" {
+        continue
+    }
+
+    if dict[ch] == nil {
+        dict[ch] = dict.keys.count
+    }
+}
 
 var result = 0
 backtracking([])
