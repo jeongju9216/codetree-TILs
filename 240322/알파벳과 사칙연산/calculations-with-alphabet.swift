@@ -50,6 +50,10 @@ for ch in arr {
     }
 }
 
-var result = 4
-backtracking([])
-print(result)
+var result = 0
+if arr.count == 1 {
+    print(4)
+} else {
+    backtracking([])
+    print(result)
+}
